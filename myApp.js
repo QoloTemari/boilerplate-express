@@ -1,8 +1,10 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 
 app.use("/public", express.static(__dirname + "/public"));
-
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(function(req, res, next){
     console.log(req.method + " " + req.path + " - " + req.ip);
     next();
@@ -26,6 +28,7 @@ app.get("/json", function(req, res) {
     } else {
       res.send({"message": "Hello json"})
     }
+  });
     
 app.get("/:word/echo", function(req, res){
 res.send({"echo":req.params.word})
