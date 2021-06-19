@@ -8,7 +8,7 @@ app.use(function(req, res, next){
     next();
   })
 
-  app.get("/now", function(req, res, next){
+app.get("/now", function(req, res, next){
     req.time = new Date().toString();
     next();
   },
@@ -20,14 +20,16 @@ app.get("/", function(req, res) {
     res.sendFile(__dirname + "/views/index.html");
   });
 
- app.get("/json", function(req, res) {
+app.get("/json", function(req, res) {
     if (process.env.MESSAGE_STYLE === "uppercase") {
       res.send({"message": "Hello json".toUpperCase()})
     } else {
       res.send({"message": "Hello json"})
     }
-
-  });
+    
+app.get("/:word/echo", function(req, res){
+res.send({"echo":req.params.word})
+});
 
  
 
